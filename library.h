@@ -6,6 +6,7 @@
 #include <iostream>
 #include <functional>
 #include <algorithm>
+#include <tuple>
 
 class rk45{
 public:
@@ -39,6 +40,32 @@ private:
   static const double a71, a72, a73, a74, a75, a76;
   static const double e1, e2, e3, e4, e5, e6, e7;
   static const double d1, d2, d3, d4, d5, d6, d7;
+};
+
+class celestialBody{
+public:
+  celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
+  
+private:
+  double x, y, z;
+  double theta, phi, psi;
+  double vx, vy, vz;
+  double M, r;
+  double w;
+};
+
+class star : celestialBody{
+public:
+  star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
+
+  std::tuple<int,int,int> color(double theta, double phi);
+
+private:
+  double T, I;
+};
+
+class planet : celestialBody{
+
 };
 
 #endif

@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 find_package(OpenMP REQUIRED)
 
 set(SOURCES
+    celestialBody.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})
