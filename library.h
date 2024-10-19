@@ -13,6 +13,8 @@
 
 #include "FastNoiseLite.h"
 
+const double PI = std::acos(-1.0);
+
 class rk45{
 public:
   rk45(int num_eq, double tolerance_abs, double tolerance_rel);
