@@ -53,7 +53,7 @@ public:
   double vx, vy, vz;
 };
 
-class celestialBody : entity{
+class celestialBody : public entity{
 public:
   celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
@@ -62,7 +62,7 @@ public:
   double w; // rotate
 };
 
-class star : celestialBody{
+class star : public celestialBody{
 public:
   star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
@@ -72,12 +72,14 @@ public:
   double T, I;
 };
 
-class planet : celestialBody{
+class planet : public celestialBody{
 
 };
 
-class camera : entity{};
+class camera : public entity{};
 
 std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
+
+std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &bodies);
 
 #endif

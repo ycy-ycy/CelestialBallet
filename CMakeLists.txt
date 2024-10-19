@@ -11,6 +11,7 @@ set(SOURCES
     rk45.cpp
     entity.cpp
     gravity.cpp
+    position.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})
