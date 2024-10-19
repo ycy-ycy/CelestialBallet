@@ -73,7 +73,42 @@ class planet : public celestialBody{
 
 };
 
-class camera : public entity{};
+class camera : entity{
+public:
+  // Constructor: Initialize the camera's position and orientation
+  camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
+          double theta_0, double phi_0, double psi_0, 
+          double fieldOfView, double aspectRatio, double nearP = 0.1, double farP = 1000.0);
+
+  // Method to ray trace the pixel values for the camera
+  std::vector<std::vector<std::tuple<int, int, int>>> rayTrace(int width, int height) const;
+
+private:
+  // Method to generate rays for the camera for a given pixel
+  std::tuple<double, double, double> generateRay(double u, double v) const;
+
+  double fov;            // Field of view (in degrees)
+  double aspect;         // Aspect ratio (width / height)
+  double nearPlane;      // Near clipping plane
+  double farPlane;       // Far clipping plane
+};
+
+class Vector3D {
+public:
+  double x, y, z;
+  Vector3D(double x, double y, double z);
+
+  double length() const;
+  Vector3D normalized() const;
+  Vector3D operator+(const Vector3D& v) const;
+  Vector3D operator-(const Vector3D& v) const;
+  Vector3D operator*(double scalar) const;
+  double dot(const Vector3D& v) const;
+  Vector3D cross(const Vector3D& v) const;
+  std::tuple<double, double, double> toTuple() const;
+  void print() const;
+};
+#endif
 
 // this gives the function dpdt
 std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
