@@ -16,10 +16,24 @@ public:
 
 class celestialBody{
 public:
-  celestialBody(double mass, double radius, double x_0, double y_0, double z_0, double theta_0, double phi_0, double psi_0);
+  celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 private:
-  double x, y, z, theta, phi, psi;
+  double x, y, z;
+  double theta, phi, psi;
+  double vx, vy, vz;
   double M, r;
+  double w;
+};
+
+class star : celestialBody{
+public:
+  star(double mass, double radius, double omega, double temperature, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
+private:
+  double T;
+};
+
+class planet : celestialBody{
+
 };
 
 #endif

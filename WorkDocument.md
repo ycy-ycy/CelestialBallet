@@ -10,6 +10,9 @@
 - Object:
     - Position: x, y, z, $\theta$, $\phi$, $\psi$
     - Move
+    - Mass
+    - Radius
+    - Rotation
 
 - Camera: Object:
     - Field of View: horizontal, vertical
@@ -18,14 +21,12 @@
     - Motion: (optional)
 
 - Star: Object:
-    - Mass
     - Temperature
     - Fluctuation
     - Intensity
     - Rotation
 
 - Planet: Object (optional):
-    - Mass
     - Reflection
 
 - Ray:
