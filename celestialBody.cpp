@@ -70,3 +70,10 @@ std::tuple<int,int,int> star::color(double theta, double phi){
 double star::radius(double theta, double phi){
   return r + fluctuation_r * noise_r.GetNoise(theta, phi);
 }
+
+planet::planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection) : celestialBody(mass, radius, omega, x_0, y_0, z_0, vx_0, vy_0, vz_0, theta_0, phi_0, psi_0){
+  r = reflection;
+  fluctuation_r = fluctuation_reflection;
+  noise_r.SetSeed(randomSeed());
+  noise_r.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+}
