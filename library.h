@@ -9,6 +9,8 @@
 #include <tuple>
 #include <omp.h>
 
+#include "FastNoiseLite.h"
+
 class rk45{
 public:
   rk45(int num_eq, double tolerance_abs, double tolerance_rel);
