@@ -28,14 +28,14 @@
     - Mass
     - Reflection
 
-- Ray: Object:
+- Ray:
     - Intensity
     - Doplher effect: (optional)
+    - Move
+    - Collision
 
 ## Algorithm
 
 rk45: Solve motion equation
 
 dpdt: Equation of motion
-
-collision: Check collistion between ray and object
