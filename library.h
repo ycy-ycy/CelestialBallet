@@ -88,7 +88,7 @@ std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &
 
 void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, const std::vector<double> &p);
 
-float getNoise(FastNoiseLite* noise, double theta, double phi);
+double getNoise(FastNoiseLite* noise, double theta, double phi);
 
 int randomSeed();
 
