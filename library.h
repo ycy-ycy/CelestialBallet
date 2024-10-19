@@ -8,6 +8,10 @@
 #include <algorithm>
 #include <tuple>
 #include <omp.h>
+#include <random>
+#include <limits>
+
+#include "FastNoiseLite.h"
 
 class rk45{
 public:
@@ -61,16 +65,26 @@ public:
 
 class star : public celestialBody{
 public:
-  star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
+  star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_intensity = 0.0, double fluctuation_radius = 0.0, double fluctuation_r = 0.0, double fluctuation_g = 0.0, double fluctuation_b = 0.0);
 
   std::tuple<int,int,int> color(double theta, double phi);
 
+  double radius(double theta, double phi);
+
 public:
   double T, I;
+  double fluctuation_I, fluctuation_R, fluctuation_r, fluctuation_g, fluctuation_b;
+  FastNoiseLite noise_I, noise_R, noise_r, noise_g, noise_b;
 };
 
-class planet : public celestialBody{
+class planet : public celestialBody{ // planets only reflect light
+public:
+  planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection = 0.0);
 
+public:
+  double r;
+  double fluctuation_r;
+  FastNoiseLite noise_r;
 };
 
 class camera : entity{
@@ -116,5 +130,9 @@ std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, con
 std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &bodies);
 
 void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, const std::vector<double> &p);
+
+double getNoise(FastNoiseLite* noise, double theta, double phi);
+
+int randomSeed();
 
 #endif
