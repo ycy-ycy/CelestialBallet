@@ -27,7 +27,7 @@ star::star(double mass, double radius, double omega, double temperature, double 
 }
 
 std::tuple<int,int,int> star::color(double theta, double phi){
-  double intensity = I + fluctuation_I * noise_I.GetNoise(theta, phi);
+  double intensity = I + fluctuation_I * getNoise(&noise_I, theta, phi);
   double r,g,b;
 
   if (T<1000.0){ // red
@@ -58,9 +58,9 @@ std::tuple<int,int,int> star::color(double theta, double phi){
     g = 255.0;
     b = 255.0;
   }
-  r += fluctuation_R * noise_R.GetNoise(theta, phi);
-  g += fluctuation_g * noise_g.GetNoise(theta, phi);
-  b += fluctuation_b * noise_b.GetNoise(theta, phi);
+  r += fluctuation_R * getNoise(&noise_r, theta, phi);
+  g += fluctuation_g * getNoise(&noise_g, theta, phi);
+  b += fluctuation_b * getNoise(&noise_b, theta, phi);
   int r_out = std::clamp(static_cast<int>(std::round(r * intensity)),0,255);
   int g_out = std::clamp(static_cast<int>(std::round(g * intensity)),0,255);
   int b_out = std::clamp(static_cast<int>(std::round(b * intensity)),0,255);
@@ -68,11 +68,11 @@ std::tuple<int,int,int> star::color(double theta, double phi){
 }
 
 double star::radius(double theta, double phi){
-  return r + fluctuation_r * noise_r.GetNoise(theta, phi);
+  return r + fluctuation_R * getNoise(&noise_R, theta, phi);
 }
 
 planet::planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection) : celestialBody(mass, radius, omega, x_0, y_0, z_0, vx_0, vy_0, vz_0, theta_0, phi_0, psi_0){
-  r = reflection;
+  rf = reflection;
   fluctuation_r = fluctuation_reflection;
   noise_r.SetSeed(randomSeed());
   noise_r.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
