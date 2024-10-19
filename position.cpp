@@ -18,3 +18,20 @@ std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &
   }
   return position;
 }
+
+void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, const std::vector<double> &p){
+  cam->x = p[0];
+  cam->y = p[1];
+  cam->z = p[2];
+  cam->vx = p[3];
+  cam->vy = p[4];
+  cam->vz = p[5];
+  for(int i = 0; i < bodies.size(); i++){
+    bodies[i]->x = p[6 + i * 6];
+    bodies[i]->y = p[7 + i * 6];
+    bodies[i]->z = p[8 + i * 6];
+    bodies[i]->vx = p[9 + i * 6];
+    bodies[i]->vy = p[10 + i * 6];
+    bodies[i]->vz = p[11 + i * 6];
+  }
+}

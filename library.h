@@ -82,4 +82,6 @@ std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, con
 
 std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &bodies);
 
+void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, const std::vector<double> &p);
+
 #endif
