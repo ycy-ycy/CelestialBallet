@@ -66,3 +66,7 @@ std::tuple<int,int,int> star::color(double theta, double phi){
   int b_out = std::clamp(static_cast<int>(std::round(b * intensity)),0,255);
   return std::make_tuple(r_out, g_out, b_out);
 }
+
+double star::radius(double theta, double phi){
+  return r + fluctuation_r * noise_r.GetNoise(theta, phi);
+}

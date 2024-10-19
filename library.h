@@ -69,6 +69,8 @@ public:
 
   std::tuple<int,int,int> color(double theta, double phi);
 
+  double radius(double theta, double phi);
+
 public:
   double T, I;
   double fluctuation_I, fluctuation_R, fluctuation_r, fluctuation_g, fluctuation_b;
