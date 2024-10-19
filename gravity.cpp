@@ -32,9 +32,9 @@ std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, con
         ay += M*y/r/r/r;
         az += M*z/r/r/r;
       }
-      result[10+6*i] = ax;
-      result[11+6*i] = ay;
-      result[12+6*i] = az;
+      result[9+6*i] = ax;
+      result[10+6*i] = ay;
+      result[11+6*i] = az;
     }
 
     return result;
@@ -42,4 +42,4 @@ std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, con
   };
 
   return f;
-};
+}
