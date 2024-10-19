@@ -7,6 +7,7 @@
 #include <functional>
 #include <algorithm>
 #include <tuple>
+#include <omp.h>
 
 class rk45{
 public:
@@ -24,14 +25,11 @@ private:
   double h;
   std::vector<double> pf;
 
-  // We impose a minimum and maximum step size
   static const double hmin, hmax;
 
-  // These are temporary variables used to store the coefficients. You are allowed to
-  // define additional temporary variables if you need them.
+  // These are temporary variables used to store the coefficients.
   std::vector<double> k1, k2, k3, k4, k5, k6, k7, y_tmp, y_err; 
 
-  // These are temporary variables used to store the coefficients
   // used in dense output
   std::vector<double> r1, r2, r3, r4, r5;
 
@@ -52,29 +50,28 @@ public:
   double vx, vy, vz;
 };
 
-class celestialBody : entity{
+class celestialBody : public entity{
 public:
   celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
-private:
+public:
   double M, r;
-  double w;
+  double w; // rotate
 };
 
-class star : celestialBody{
+class star : public celestialBody{
 public:
   star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
   std::tuple<int,int,int> color(double theta, double phi);
 
-private:
+public:
   double T, I;
 };
 
-class planet : celestialBody{
+class planet : public celestialBody{
 
 };
-
 
 class camera : entity{
 public:
@@ -111,4 +108,13 @@ public:
   std::tuple<double, double, double> toTuple() const;
   void print() const;
 };
+#endif
+
+// this gives the function dpdt
+std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
+
+std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &bodies);
+
+void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, const std::vector<double> &p);
+
 #endif
