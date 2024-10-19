@@ -12,6 +12,8 @@ set(SOURCES
     entity.cpp
     gravity.cpp
     position.cpp
+    camera.cpp
+    Vector3D.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})
