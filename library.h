@@ -82,7 +82,7 @@ public:
   planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection = 0.0);
 
 public:
-  double r;
+  double rf;
   double fluctuation_r;
   FastNoiseLite noise_r;
 };
