@@ -25,14 +25,11 @@ private:
   double h;
   std::vector<double> pf;
 
-  // We impose a minimum and maximum step size
   static const double hmin, hmax;
 
-  // These are temporary variables used to store the coefficients. You are allowed to
-  // define additional temporary variables if you need them.
+  // These are temporary variables used to store the coefficients.
   std::vector<double> k1, k2, k3, k4, k5, k6, k7, y_tmp, y_err; 
 
-  // These are temporary variables used to store the coefficients
   // used in dense output
   std::vector<double> r1, r2, r3, r4, r5;
 
@@ -78,6 +75,7 @@ class planet : public celestialBody{
 
 class camera : public entity{};
 
+// this gives the function dpdt
 std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
 
 std::vector<double> getPosition(camera* cam, const std::vector<celestialBody*> &bodies);
