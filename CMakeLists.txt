@@ -8,6 +8,8 @@ find_package(OpenMP REQUIRED)
 
 set(SOURCES
     celestialBody.cpp
+    rk45.cpp
+    entity.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})
