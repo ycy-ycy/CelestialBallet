@@ -7,6 +7,7 @@
 #include <functional>
 #include <algorithm>
 #include <tuple>
+#include <omp.h>
 
 class rk45{
 public:
@@ -45,7 +46,8 @@ private:
 class entity{
 public:
   entity(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
-private:
+
+public:
   double x, y, z;
   double theta, phi, psi;
   double vx, vy, vz;
@@ -55,9 +57,9 @@ class celestialBody : entity{
 public:
   celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
-private:
+public:
   double M, r;
-  double w;
+  double w; // rotate
 };
 
 class star : celestialBody{
@@ -66,12 +68,16 @@ public:
 
   std::tuple<int,int,int> color(double theta, double phi);
 
-private:
+public:
   double T, I;
 };
 
 class planet : celestialBody{
 
 };
+
+class camera : entity{};
+
+std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
 
 #endif
