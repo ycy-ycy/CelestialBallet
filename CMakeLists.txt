@@ -10,6 +10,7 @@ set(SOURCES
     celestialBody.cpp
     rk45.cpp
     entity.cpp
+    gravity.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})
