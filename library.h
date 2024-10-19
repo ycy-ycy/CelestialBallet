@@ -122,7 +122,6 @@ public:
   std::tuple<double, double, double> toTuple() const;
   void print() const;
 };
-#endif
 
 // this gives the function dpdt
 std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
