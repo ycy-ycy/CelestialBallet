@@ -27,7 +27,7 @@ std::vector<double> rk45::solve(double t0, double tf, std::vector<double> p0, st
   pf.clear();
 
   // initial conditions
-  double h = 0.1; // arbitrary initial step size
+  h = 0.1; // arbitrary initial step size
   double x = t0;
   std::vector<double> y = p0;
   double err = 1.0;
