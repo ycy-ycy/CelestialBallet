@@ -14,6 +14,7 @@ set(SOURCES
     position.cpp
     camera.cpp
     Vector3D.cpp
+    ray.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})

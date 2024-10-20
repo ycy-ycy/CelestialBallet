@@ -3,14 +3,12 @@
 // Constructor definition
 camera::camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
                double theta_0, double phi_0, double psi_0, 
-               double fieldOfView, double aspectRatio, double nearP, double farP)
+               double fieldOfView, double aspectRatio)
     : entity(x_0, y_0, z_0, vx_0, vy_0, vz_0, theta_0, phi_0, psi_0)
 {
   // Initialize the camera's field of view, aspect ratio, near and far planes
   double fov = fieldOfView;
   double ar = aspectRatio;
-  double nearPlane = nearP;
-  double farPlane = farP;
 }
 
 std::tuple<double, double, double> camera::generateRay(double u, double v) const
@@ -46,7 +44,9 @@ std::tuple<double, double, double> camera::generateRay(double u, double v) const
 }
 
 
-std::vector<std::vector<std::tuple<int, int, int>>> camera::rayTrace(int width, int height) const
+std::tuple<int, int, int> camera::rayTrace(double u, double v, const std::vector<celestialBody*> &bodies) const
 {
-  // TODO: Implement ray tracing for the camera
+  std::tuple<double, double, double> direction = generateRay(u, v);
+  ray traced(x, y, z, std::get<0>(direction), std::get<1>(direction), std::get<2>(direction), bodies);
+  return traced.color();
 }

@@ -94,10 +94,10 @@ public:
   // Constructor: Initialize the camera's position and orientation
   camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
           double theta_0, double phi_0, double psi_0, 
-          double fieldOfView, double aspectRatio, double nearP = 0.1, double farP = 1000.0);
+          double fieldOfView, double aspectRatio);
 
   // Method to ray trace the pixel values for the camera
-  std::vector<std::vector<std::tuple<int, int, int>>> rayTrace(int width, int height) const;
+  std::tuple<int, int, int> rayTrace(double u, double v, const std::vector<celestialBody*> &bodies) const; // u, v are relative position
 
 private:
   // Method to generate rays for the camera for a given pixel
@@ -123,6 +123,20 @@ public:
   Vector3D cross(const Vector3D& v) const;
   std::tuple<double, double, double> toTuple() const;
   void print() const;
+};
+
+class ray {
+public:
+  ray(double x_0, double y_0, double z_0, double dx_0, double dy_0, double dz_0, const std::vector<celestialBody*> &allBodies);
+
+  std::tuple<int, int, int> color() const;
+
+public:
+  double x, y, z;
+  double dx, dy, dz;
+  double I; // intensity
+  std::vector<celestialBody*> bodies;
+  std::vector<double> distance;
 };
 
 // this gives the function dpdt
