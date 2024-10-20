@@ -13,6 +13,8 @@
 
 #include "FastNoiseLite.h"
 
+const double PI = std::acos(-1.0);
+
 class rk45{
 public:
   rk45(int num_eq, double tolerance_abs, double tolerance_rel);
@@ -58,28 +60,45 @@ class celestialBody : public entity{
 public:
   celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
+  virtual double radius(double theta, double phi);
+
+  virtual std::function<double(double)> rayDistance(ray* photon);
+
+  std::tuple<double,double> getAngles(double x_r, double y_r, double z_r);
+
 public:
   double M, r;
   double w; // rotate
+  double fluctuation_R; // maximum fluctuation in radius
 };
 
 class star : public celestialBody{
 public:
   star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_intensity = 0.0, double fluctuation_radius = 0.0, double fluctuation_r = 0.0, double fluctuation_g = 0.0, double fluctuation_b = 0.0);
 
-  std::tuple<int,int,int> color(double theta, double phi);
+  std::tuple<int,int,int> color(double theta, double phi, double intensity);
 
   double radius(double theta, double phi);
 
+  std::function<double(double)> rayDistance(ray* photon);
+
 public:
   double T, I;
-  double fluctuation_I, fluctuation_R, fluctuation_r, fluctuation_g, fluctuation_b;
+  double fluctuation_I, fluctuation_r, fluctuation_g, fluctuation_b;
   FastNoiseLite noise_I, noise_R, noise_r, noise_g, noise_b;
 };
 
 class planet : public celestialBody{ // planets only reflect light
 public:
   planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection = 0.0);
+
+  double radius(double theta, double phi);
+
+  std::function<double(double)> rayDistance(ray* photon);
+
+  double getReflection(double theta, double phi);
+
+  void reflect(ray* photon, double theta, double phi);
 
 public:
   double rf;
@@ -92,10 +111,10 @@ public:
   // Constructor: Initialize the camera's position and orientation
   camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
           double theta_0, double phi_0, double psi_0, 
-          double fieldOfView, double aspectRatio, double nearP = 0.1, double farP = 1000.0);
+          double fieldOfView, double aspectRatio);
 
   // Method to ray trace the pixel values for the camera
-  std::vector<std::vector<std::tuple<int, int, int>>> rayTrace(int width, int height) const;
+  std::tuple<int, int, int> rayTrace(double u, double v, const std::vector<celestialBody*> &bodies) const; // u, v are relative position
 
 private:
   // Method to generate rays for the camera for a given pixel
@@ -123,6 +142,26 @@ public:
   void print() const;
 };
 
+class ray {
+public:
+  ray(double x_0, double y_0, double z_0, double dx_0, double dy_0, double dz_0, const std::vector<celestialBody*> &allBodies);
+
+  std::tuple<int, int, int> color();
+
+public:
+  double x, y, z;
+  double vx, vy, vz;
+  double I; // intensity
+  std::vector<celestialBody*> bodies;
+  std::vector<double> distances;
+  celestialBody* closest_body;
+  double min_dist;
+
+private:
+  void updateDistances();
+  bool move();
+};
+
 // this gives the function dpdt
 std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, const std::vector<celestialBody*> &bodies);
 
@@ -133,6 +172,13 @@ void updatePosition(camera* cam, const std::vector<celestialBody*> &bodies, cons
 double getNoise(FastNoiseLite* noise, double theta, double phi);
 
 int randomSeed();
+
+// set the boundaries of the simulation
+double x_p, y_p, z_p;
+double x_m, y_m, z_m;
+void setBoundaries(double r);
+void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0);
+void setBoundaries(double x, double y, double z);
 
 double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 5000, double tol = 1e-10);
 
