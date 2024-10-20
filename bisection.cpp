@@ -20,5 +20,10 @@ double bisection(std::function<double(double)> f, double x_min, double x_max, in
     error = std::abs(x_max - x_min);
     n++;
   }
+
+  if (error > tol){
+    x_mid = std::numeric_limits<double>::quiet_NaN();
+  }
+
   return x_mid;
 }
