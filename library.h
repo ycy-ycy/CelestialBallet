@@ -134,4 +134,6 @@ double getNoise(FastNoiseLite* noise, double theta, double phi);
 
 int randomSeed();
 
+double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 5000, double tol = 1e-10);
+
 #endif
