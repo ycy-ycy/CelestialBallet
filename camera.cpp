@@ -51,12 +51,14 @@ std::tuple<int, int, int> camera::rayTrace(double u, double v, const std::vector
   return traced.color();
 }
 
-void camera::takePhoto(const std::vector<celestialBody*> &bodies, const std::string& filename, int widthPixel, int parallel = 8){
+bool ensureDirectoryExists(const std::string& filename);
+
+void camera::takePhoto(const std::vector<celestialBody*> &bodies, const std::string& filename, int widthPixel, int parallel){
   if (!ensureDirectoryExists(filename)){
     std::cerr << "Error: Failed to create directory for output file." << std::endl;
     return;
   }
-  
+
   int heightPixel = std::round((double)widthPixel * aspect);
   std::tuple<int,int,int>* colors = new std::tuple<int,int,int>[widthPixel--*heightPixel--];
 

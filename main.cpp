@@ -1,6 +1,8 @@
 #include "library.h"
 
 int main(){
+  setBoundaries(30.0);
+  std::cout << x_minus << std::endl;
   camera* cam = new camera(-10.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,1.0);
   std::vector<celestialBody*> bodies;
   bodies.push_back(new star(1.0,1.0,1.0,2000.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0));

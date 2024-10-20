@@ -43,6 +43,30 @@ std::tuple<double,double> celestialBody::getAngles(double x_r, double y_r, doubl
   return std::make_tuple(theta_out, phi_out);
 }
 
+double celestialBody::radius(double theta, double phi){
+  return r;
+}
+
+std::function<double(double)> celestialBody::rayDistance(ray* photon){
+  double x_s = x;
+  double y_s = y;
+  double z_s = z;
+  double x_r = photon->x;
+  double y_r = photon->y;
+  double z_r = photon->z;
+  double vx_r = photon->vx;
+  double vy_r = photon->vy;
+  double vz_r = photon->vz;
+  double r_s = r;
+  std::function<double(double)> f = [x_s, y_s, z_s, x_r, y_r, z_r, vx_r, vy_r, vz_r, r_s] (double x_p) -> double {
+    double delta_x = x_s - x_p * vx_r - x_r;
+    double delta_y = y_s - x_p * vy_r - y_r;
+    double delta_z = z_s - x_p * vz_r - z_r;
+    return r_s - std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
+  };
+  return f;
+}
+
 star::star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_intensity, double fluctuation_radius, double fluctuation_r, double fluctuation_g, double fluctuation_b) : celestialBody(mass, radius, omega, x_0, y_0, z_0, vx_0, vy_0, vz_0, theta_0, phi_0, psi_0){
   T = temperature;
   I = intensity;
@@ -122,8 +146,8 @@ std::function<double(double)> star::rayDistance(ray* photon){
   double r_s = r;
   std::function<double(double)> f = [x_s, y_s, z_s, x_r, y_r, z_r, vx_r, vy_r, vz_r, r_s] (double x_p) -> double {
     double delta_x = x_s - x_p * vx_r - x_r;
-    double delta_y = y_s - y_p * vy_r - y_r;
-    double delta_z = z_s - z_p * vz_r - z_r;
+    double delta_y = y_s - x_p * vy_r - y_r;
+    double delta_z = z_s - x_p * vz_r - z_r;
     return r_s - std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
   };
   return f;
@@ -153,8 +177,8 @@ std::function<double(double)> planet::rayDistance(ray* photon){
   double r_s = r;
   std::function<double(double)> f = [x_s, y_s, z_s, x_r, y_r, z_r, vx_r, vy_r, vz_r, r_s] (double x_p) -> double {
     double delta_x = x_s - x_p * vx_r - x_r;
-    double delta_y = y_s - y_p * vy_r - y_r;
-    double delta_z = z_s - z_p * vz_r - z_r;
+    double delta_y = y_s - x_p * vy_r - y_r;
+    double delta_z = z_s - x_p * vz_r - z_r;
     return r_s - std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
   };
   return f;

@@ -1,30 +1,37 @@
 #include "library.h"
 
+double x_plus = 20.0;
+double y_plus = 20.0;
+double z_plus = 20.0;
+double x_minus = -20.0;
+double y_minus = -20.0;
+double z_minus = -20.0;
+
 void setBoundaries(double r){
-  x_m = -r;
-  y_m = -r;
-  z_m = -r;
-  x_p = r;
-  y_p = r;
-  z_p = r;
+  x_minus = -r;
+  y_minus = -r;
+  z_minus = -r;
+  x_plus = r;
+  y_plus = r;
+  z_plus = r;
 }
 
 void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0){
-  x_m = x_m_0;
-  y_m = y_m_0;
-  z_m = z_m_0;
-  x_p = x_p_0;
-  y_p = y_p_0;
-  z_p = z_p_0;
+  x_minus = x_m_0;
+  y_minus = y_m_0;
+  z_minus = z_m_0;
+  x_plus = x_p_0;
+  y_plus = y_p_0;
+  z_plus = z_p_0;
 }
 
 void setBoundaries(double x, double y, double z){
-  x_m = -x;
-  y_m = -y;
-  z_m = -z;
-  x_p = x;
-  y_p = y;
-  z_p = z;
+  x_minus = -x;
+  y_minus = -y;
+  z_minus = -z;
+  x_plus = x;
+  y_plus = y;
+  z_plus = z;
 }
 
 ray::ray(double x_0, double y_0, double z_0, double dx_0, double dy_0, double dz_0, const std::vector<celestialBody*> &allBodies){
@@ -44,7 +51,7 @@ std::tuple<int, int, int> ray::color(){
   // repeat steps
   while (true) {
     // if out of bounds, return black
-    if (x < x_m || x > x_p || y < y_m || y > y_p || z < z_m || z > z_p) { return std::make_tuple(0,0,0); }
+    if (x < x_minus || x > x_plus || y < y_minus || y > y_plus || z < z_minus || z > z_plus) { return std::make_tuple(0,0,0); }
 
     // refresh distance to each body
     updateDistances();

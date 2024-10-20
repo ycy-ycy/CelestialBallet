@@ -173,8 +173,8 @@ void rk45::compute_dense_rs(const std::vector<double> &y_next, const std::vector
 // const double rk45::c5 = 8.0 / 9.0;
 
 // We impose a minimum and maximum step size
-const double hmin = 1.0e-10;
-const double hmax = 1.0;
+const double rk45::hmin = 1.0e-10;
+const double rk45::hmax = 1.0;
 
 const double rk45::a21 = 1.0 / 5.0;
 const double rk45::a31 = 3.0 / 40.0;
