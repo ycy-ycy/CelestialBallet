@@ -72,8 +72,10 @@ void camera::takePhoto(const std::vector<celestialBody*> &bodies, const std::str
   }
 
   std::ofstream file(filename);
-  for (int row = 0; row < ++heightPixel; row++){
-    for (int col = 0; col < ++widthPixel; col++){
+  heightPixel++;
+  widthPixel++;
+  for (int row = 0; row < heightPixel; row++){
+    for (int col = 0; col < widthPixel; col++){
       file << "(" << std::get<0>(colors[row*widthPixel+col]) << "," << std::get<1>(colors[row*widthPixel+col]) << "," << std::get<2>(colors[row*widthPixel+col]) << ")" << ";";
     }
     file << std::endl;
