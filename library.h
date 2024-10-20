@@ -60,6 +60,8 @@ class celestialBody : public entity{
 public:
   celestialBody(double mass, double radius, double omega, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0);
 
+  virtual double radius(double theta, double phi);
+
 public:
   double M, r;
   double w; // rotate
@@ -82,6 +84,8 @@ public:
 class planet : public celestialBody{ // planets only reflect light
 public:
   planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection = 0.0);
+
+  double radius(double theta, double phi);
 
 public:
   double rf;
@@ -129,14 +133,20 @@ class ray {
 public:
   ray(double x_0, double y_0, double z_0, double dx_0, double dy_0, double dz_0, const std::vector<celestialBody*> &allBodies);
 
-  std::tuple<int, int, int> color() const;
+  std::tuple<int, int, int> color();
 
 public:
   double x, y, z;
-  double dx, dy, dz;
+  double vx, vy, vz;
   double I; // intensity
   std::vector<celestialBody*> bodies;
-  std::vector<double> distance;
+  std::vector<double> distances;
+  celestialBody* closest_body;
+  double min_dist;
+
+private:
+  void updateDistances();
+  void move();
 };
 
 // this gives the function dpdt

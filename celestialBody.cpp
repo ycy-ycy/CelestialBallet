@@ -77,3 +77,7 @@ planet::planet(double mass, double radius, double omega, double reflection, doub
   noise_r.SetSeed(randomSeed());
   noise_r.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 }
+
+double planet::radius(double theta, double phi){
+  return r;
+}
