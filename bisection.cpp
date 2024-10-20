@@ -1,6 +1,6 @@
 #include "library.h"
 
-double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 1000, double tol = 1e-10){
+double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 500, double tol = 1e-6){
   double x_mid = (x_min + x_max) / 2.0;
   double f_min = f(x_min);
   double f_max = f(x_max);
