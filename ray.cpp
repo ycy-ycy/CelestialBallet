@@ -89,16 +89,18 @@ std::tuple<int, int, int> ray::color(){
 
 void ray::updateDistances(){
   distances.clear();
-  min_dist = 0;
+  min_dist = -1.0;
   closest_body = nullptr;
   for (int i = 0; i < bodies.size(); i++) {
     double delta_x = bodies[i]->x - x;
     double delta_y = bodies[i]->y - y;
     double delta_z = bodies[i]->z - z;
     double dist = std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
-    if (!closest_body) {
-      min_dist = dist < min_dist? dist : min_dist;
-      closest_body = bodies[i];
+    if (min_dist > 0.0) {
+      if (min_dist > dist) {
+        min_dist = dist;
+        closest_body = bodies[i];
+      }
     }
     else{
       min_dist = dist;

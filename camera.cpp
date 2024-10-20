@@ -62,7 +62,7 @@ void camera::takePhoto(const std::vector<celestialBody*> &bodies, const std::str
   int heightPixel = std::round((double)widthPixel * aspect);
   std::tuple<int,int,int>* colors = new std::tuple<int,int,int>[widthPixel--*heightPixel--];
 
-  #pragma omp parallel for collapse(2) num_threads(parallel)
+  // #pragma omp parallel for collapse(2) num_threads(parallel)
   for (int row = 0; row <= heightPixel; row++){
     for (int col = 0; col <= widthPixel; col++){
       double u = (double)col / widthPixel;
