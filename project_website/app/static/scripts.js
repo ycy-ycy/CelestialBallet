@@ -87,7 +87,8 @@ document.getElementById('addBodyBtn').addEventListener('click', addCelestialBody
 function renderImage(pixelData) {
   const canvas = document.getElementById('resultCanvas');
   const ctx = canvas.getContext('2d');
-  
+  const video = document.querySelector('video');
+
   const width = 100; // Assume a 100x100 image for now
   const height = 100;
   canvas.width = width;
@@ -106,4 +107,8 @@ function renderImage(pixelData) {
   }
 
   ctx.putImageData(imageData, 0, 0);
+
+  // Show the canvas and hide the video once the simulation is ready
+  canvas.style.display = 'block';
+  video.style.display = 'none';
 }
