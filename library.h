@@ -180,6 +180,6 @@ void setBoundaries(double r);
 void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0);
 void setBoundaries(double x, double y, double z);
 
-double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 5000, double tol = 1e-10);
+double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 500, double tol = 1e-6);
 
 #endif
