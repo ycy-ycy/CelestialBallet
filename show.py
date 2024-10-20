@@ -47,4 +47,4 @@ def generate_video(folder, n, fps, output_file):
     video.release()
     cv2.destroyAllWindows()
     
-generate_video("build/test",121,30,"build/twostar.avi")
+generate_video("build/test",121,30,"build/twomassivestar.avi")
