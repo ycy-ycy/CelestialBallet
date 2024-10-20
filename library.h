@@ -65,6 +65,7 @@ public:
 public:
   double M, r;
   double w; // rotate
+  double fluctuation_R; // maximum fluctuation in radius
 };
 
 class star : public celestialBody{
@@ -77,7 +78,7 @@ public:
 
 public:
   double T, I;
-  double fluctuation_I, fluctuation_R, fluctuation_r, fluctuation_g, fluctuation_b;
+  double fluctuation_I, fluctuation_r, fluctuation_g, fluctuation_b;
   FastNoiseLite noise_I, noise_R, noise_r, noise_g, noise_b;
 };
 
@@ -146,7 +147,7 @@ public:
 
 private:
   void updateDistances();
-  void move();
+  bool move();
 };
 
 // this gives the function dpdt
