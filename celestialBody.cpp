@@ -159,3 +159,20 @@ std::function<double(double)> planet::rayDistance(ray* photon){
   };
   return f;
 }
+
+double planet::getReflection(double theta, double phi){
+  return rf + fluctuation_r * getNoise(&noise_r, theta, phi);
+}
+
+void planet::reflect(ray* photon, double theta, double phi){
+  double delta_x = photon->x - x;
+  double delta_y = photon->y - y;
+  double delta_z = photon->z - z;
+  Vector3D delta = Vector3D(delta_x, delta_y, delta_z).normalized();
+  Vector3D incident = Vector3D(photon->vx, photon->vy, photon->vz).normalized();
+  double dot = delta.dot(incident);
+  photon->vx = -2.0 * dot * delta.x + incident.x;
+  photon->vy = -2.0 * dot * delta.y + incident.y;
+  photon->vz = -2.0 * dot * delta.z + incident.z;
+  photon->I *= getReflection(theta, phi);
+}

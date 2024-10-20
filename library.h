@@ -96,6 +96,10 @@ public:
 
   std::function<double(double)> rayDistance(ray* photon);
 
+  double getReflection(double theta, double phi);
+
+  void reflect(ray* photon, double theta, double phi);
+
 public:
   double rf;
   double fluctuation_r;
