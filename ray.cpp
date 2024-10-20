@@ -57,7 +57,7 @@ std::tuple<int, int, int> ray::color(){
       // pass self to the closest body and get a function to calculate distance to surface
       std::function<double(double)> distanceToSurface = closest_body->rayDistance(this);
       // use bisection to find the exact point of collision
-      double x_p = bisection(distanceToSurface, -(closest_body->r + closest_body->fluctuation_R) * 1.1, (closest_body->r + closest_body->fluctuation_R) * 1.1);
+      double x_p = bisection(distanceToSurface, -(closest_body->r + closest_body->fluctuation_R) * 0.6, (closest_body->r + closest_body->fluctuation_R) * 0.6);
       // if not collide, continue
       if (std::isnan(x_p)) { continue; }
       // move
@@ -109,5 +109,5 @@ bool ray::move(){
   double delta_y = closest_body->y - y;
   double delta_z = closest_body->z - z;
   double dist = std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
-  return dist <= (closest_body->r + closest_body->fluctuation_R) * 1.01; // add a small margin to avoid missing collisions
+  return dist <= (closest_body->r + closest_body->fluctuation_R) * 1.12; // add a small margin to avoid missing collisions
 }

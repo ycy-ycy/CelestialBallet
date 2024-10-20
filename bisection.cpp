@@ -8,12 +8,15 @@ double bisection(std::function<double(double)> f, double x_min, double x_max, in
   double error = std::abs(x_max - x_min);
   int n = 0;
   while (error > tol && n < n_max){
-    if (f_min * f_mid < 0){
+    if (f_min * f_mid <= 0){
       x_max = x_mid;
       f_max = f_mid;
     } else {
       x_min = x_mid;
       f_min = f_mid;
+    }
+    if (f_min * f_mid > 1e-12 && f_max * f_mid > 1e-12){ // quit in advance
+      return std::numeric_limits<double>::quiet_NaN();
     }
     x_mid = (x_min + x_max) / 2.0;
     f_mid = f(x_mid);
