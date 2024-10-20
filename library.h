@@ -64,6 +64,8 @@ public:
 
   virtual std::function<double(double)> rayDistance(ray* photon);
 
+  std::tuple<double,double> getAngles(double x_r, double y_r, double z_r);
+
 public:
   double M, r;
   double w; // rotate

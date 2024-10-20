@@ -60,10 +60,20 @@ std::tuple<int, int, int> ray::color(){
       double x_p = bisection(distanceToSurface, -(closest_body->r + closest_body->fluctuation_R) * 1.1, (closest_body->r + closest_body->fluctuation_R) * 1.1);
       // if not collide, continue
       if (std::isnan(x_p)) { continue; }
+      // move
+      x += vx * x_p;
+      y += vy * x_p;
+      z += vz * x_p;
+      // anlges on the celestial body
+      std::tuple<double, double> angles = closest_body->getAngles(x,y,z);
       // if it's a star, return its color
-
+      if (star* collideStar = dynamic_cast<star*>(closest_body)){
+        return collideStar->color(std::get<0>(angles), std::get<1>(angles));
+      }
       // if it's a planet, reflect and continue
-
+      if (planet* collidePlanet = dynamic_cast<planet*>(closest_body)){
+        collidePlanet->reflect(this, std::get<0>(angles), std::get<1>(angles));
+      }
     }
 
     return std::make_tuple(0,0,0);
