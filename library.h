@@ -87,7 +87,7 @@ public:
   FastNoiseLite noise_r;
 };
 
-class camera : entity{
+class camera : public entity{
 public:
   // Constructor: Initialize the camera's position and orientation
   camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
