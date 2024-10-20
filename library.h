@@ -150,4 +150,11 @@ double getNoise(FastNoiseLite* noise, double theta, double phi);
 
 int randomSeed();
 
+// set the boundaries of the simulation
+double x_p, y_p, z_p;
+double x_m, y_m, z_m;
+void setBoundaries(double r);
+void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0);
+void setBoundaries(double x, double y, double z);
+
 #endif
