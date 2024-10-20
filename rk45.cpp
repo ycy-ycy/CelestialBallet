@@ -1,9 +1,9 @@
 # include "library.h"
 
 rk45::rk45(int num_eq, double tolerance_abs, double tolerance_rel){
-  int n_eq = num_eq;
-  double atol = tolerance_abs;
-  double rtol = tolerance_rel;
+  n_eq = num_eq;
+  atol = tolerance_abs;
+  rtol = tolerance_rel;
 
   y_tmp.resize(n_eq);
   y_err.resize(n_eq);
@@ -93,7 +93,7 @@ std::vector<double> rk45::solve(double t0, double tf, std::vector<double> p0, st
 std::vector<double> rk45::step(double t, std::vector<double> &p, std::function<std::vector<double>(std::vector<double>)> dpdt)
 {
   // Compute the next step in y, given x and y of the current step
-  std::vector<double> y_next(p.size());
+  std::vector<double> y_n(p.size());
 
   // First step
   for (int i = 0; i < p.size(); i++) {
@@ -129,10 +129,10 @@ std::vector<double> rk45::step(double t, std::vector<double> &p, std::function<s
   // Sixth step
   k6 = dpdt(y_tmp);
   for (int i = 0; i < p.size(); i++) {
-    y_next[i] = p[i] + h * (a71 * k1[i] + a72 * k2[i] + a73 * k3[i] +
+    y_n[i] = p[i] + h * (a71 * k1[i] + a72 * k2[i] + a73 * k3[i] +
                             a74 * k4[i] + a75 * k5[i] + a76 * k6[i]);
   }
-  k7 = dpdt(y_next);
+  k7 = dpdt(y_n);
 
   // Estimate y_err for each y in the vector using the difference
   // between y1 and y2
@@ -141,7 +141,7 @@ std::vector<double> rk45::step(double t, std::vector<double> &p, std::function<s
                       e6 * k6[i] + e7 * k7[i]);
   }
 
-  return y_next;
+  return y_n;
 }
 
 double rk45::error(const std::vector<double> &p)
