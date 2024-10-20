@@ -55,17 +55,17 @@ std::tuple<int, int, int> ray::color(){
     // if collide, search for the collision point
     if (collide){
       // pass self to the closest body and get a function to calculate distance to surface
-
+      std::function<double(double)> distanceToSurface = closest_body->rayDistance(this);
       // use bisection to find the exact point of collision
-
+      double x_p = bisection(distanceToSurface, -(closest_body->r + closest_body->fluctuation_R) * 1.1, (closest_body->r + closest_body->fluctuation_R) * 1.1);
       // if not collide, continue
-
+      if (std::isnan(x_p)) { continue; }
       // if it's a star, return its color
 
       // if it's a planet, reflect and continue
 
     }
-    
+
     return std::make_tuple(0,0,0);
   }
 }

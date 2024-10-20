@@ -72,6 +72,27 @@ double star::radius(double theta, double phi){
   return r + fluctuation_R * getNoise(&noise_R, theta, phi);
 }
 
+std::function<double(double)> star::rayDistance(ray* photon){
+  // TODO : add angle dependence
+  double x_s = x;
+  double y_s = y;
+  double z_s = z;
+  double x_r = photon->x;
+  double y_r = photon->y;
+  double z_r = photon->z;
+  double vx_r = photon->vx;
+  double vy_r = photon->vy;
+  double vz_r = photon->vz;
+  double r_s = r;
+  std::function<double(double)> f = [x_s, y_s, z_s, x_r, y_r, z_r, vx_r, vy_r, vz_r, r_s] (double x_p) -> double {
+    double delta_x = x_s - x_p * vx_r - x_r;
+    double delta_y = y_s - y_p * vy_r - y_r;
+    double delta_z = z_s - z_p * vz_r - z_r;
+    return r_s - std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
+  };
+  return f;
+}
+
 planet::planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection) : celestialBody(mass, radius, omega, x_0, y_0, z_0, vx_0, vy_0, vz_0, theta_0, phi_0, psi_0){
   rf = reflection;
   fluctuation_r = fluctuation_reflection;
@@ -81,4 +102,24 @@ planet::planet(double mass, double radius, double omega, double reflection, doub
 
 double planet::radius(double theta, double phi){
   return r;
+}
+
+std::function<double(double)> planet::rayDistance(ray* photon){
+  double x_s = x;
+  double y_s = y;
+  double z_s = z;
+  double x_r = photon->x;
+  double y_r = photon->y;
+  double z_r = photon->z;
+  double vx_r = photon->vx;
+  double vy_r = photon->vy;
+  double vz_r = photon->vz;
+  double r_s = r;
+  std::function<double(double)> f = [x_s, y_s, z_s, x_r, y_r, z_r, vx_r, vy_r, vz_r, r_s] (double x_p) -> double {
+    double delta_x = x_s - x_p * vx_r - x_r;
+    double delta_y = y_s - y_p * vy_r - y_r;
+    double delta_z = z_s - z_p * vz_r - z_r;
+    return r_s - std::sqrt(delta_x*delta_x + delta_y*delta_y + delta_z*delta_z);
+  };
+  return f;
 }

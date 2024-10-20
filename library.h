@@ -62,6 +62,8 @@ public:
 
   virtual double radius(double theta, double phi);
 
+  virtual std::function<double(double)> rayDistance(ray* photon);
+
 public:
   double M, r;
   double w; // rotate
@@ -76,6 +78,8 @@ public:
 
   double radius(double theta, double phi);
 
+  std::function<double(double)> rayDistance(ray* photon);
+
 public:
   double T, I;
   double fluctuation_I, fluctuation_r, fluctuation_g, fluctuation_b;
@@ -87,6 +91,8 @@ public:
   planet(double mass, double radius, double omega, double reflection, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_reflection = 0.0);
 
   double radius(double theta, double phi);
+
+  std::function<double(double)> rayDistance(ray* photon);
 
 public:
   double rf;
@@ -167,5 +173,7 @@ double x_m, y_m, z_m;
 void setBoundaries(double r);
 void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0);
 void setBoundaries(double x, double y, double z);
+
+double bisection(std::function<double(double)> f, double start, double end, int n_max = 1000, double tol = 1e-6);
 
 #endif
