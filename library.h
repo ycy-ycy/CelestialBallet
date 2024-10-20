@@ -10,6 +10,9 @@
 #include <omp.h>
 #include <random>
 #include <limits>
+#include <string>
+#include <filesystem>
+#include <fstream>
 
 #include "FastNoiseLite.h"
 
@@ -113,10 +116,12 @@ public:
           double theta_0, double phi_0, double psi_0, 
           double fieldOfView, double aspectRatio);
 
+  void takePhoto(const std::vector<celestialBody*> &bodies, const std::string& filename, int widthPixel, int parallel = 8);
+
+private:
   // Method to ray trace the pixel values for the camera
   std::tuple<int, int, int> rayTrace(double u, double v, const std::vector<celestialBody*> &bodies) const; // u, v are relative position
 
-private:
   // Method to generate rays for the camera for a given pixel
   std::tuple<double, double, double> generateRay(double u, double v) const;
 
