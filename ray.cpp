@@ -83,8 +83,6 @@ std::tuple<int, int, int> ray::color(){
         collidePlanet->reflect(this, std::get<0>(angles), std::get<1>(angles));
       }
     }
-
-    return std::make_tuple(0,0,0);
   }
 }
 
