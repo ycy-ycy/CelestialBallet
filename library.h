@@ -106,7 +106,7 @@ public:
   FastNoiseLite noise_r;
 };
 
-class camera : entity{
+class camera : public entity{
 public:
   // Constructor: Initialize the camera's position and orientation
   camera(double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, 
@@ -180,6 +180,6 @@ void setBoundaries(double r);
 void setBoundaries(double x_m_0, double y_m_0, double z_m_0, double x_p_0, double y_p_0, double z_p_0);
 void setBoundaries(double x, double y, double z);
 
-double bisection(std::function<double(double)> f, double start, double end, int n_max = 1000, double tol = 1e-6);
+double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 5000, double tol = 1e-10);
 
 #endif

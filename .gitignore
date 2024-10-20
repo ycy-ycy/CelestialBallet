@@ -1,3 +1,4 @@
 .vscode/
+*.dSYM/
 rk45_dormand_prince.h
 build/
