@@ -15,6 +15,7 @@ set(SOURCES
     camera.cpp
     Vector3D.cpp
     ray.cpp
+    noise.cpp
     bisection.cpp
     moveit.cpp
     main.cpp
