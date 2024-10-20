@@ -63,8 +63,8 @@ star::star(double mass, double radius, double omega, double temperature, double 
   noise_b.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 }
 
-std::tuple<int,int,int> star::color(double theta, double phi){
-  double intensity = I + fluctuation_I * getNoise(&noise_I, theta, phi);
+std::tuple<int,int,int> star::color(double theta, double phi, double intensity){
+  intensity *= (I + fluctuation_I * getNoise(&noise_I, theta, phi));
   double r,g,b;
 
   if (T<1000.0){ // red

@@ -76,7 +76,7 @@ class star : public celestialBody{
 public:
   star(double mass, double radius, double omega, double temperature, double intensity, double x_0, double y_0, double z_0, double vx_0, double vy_0, double vz_0, double theta_0, double phi_0, double psi_0, double fluctuation_intensity = 0.0, double fluctuation_radius = 0.0, double fluctuation_r = 0.0, double fluctuation_g = 0.0, double fluctuation_b = 0.0);
 
-  std::tuple<int,int,int> color(double theta, double phi);
+  std::tuple<int,int,int> color(double theta, double phi, double intensity);
 
   double radius(double theta, double phi);
 

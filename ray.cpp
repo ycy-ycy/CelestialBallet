@@ -68,7 +68,7 @@ std::tuple<int, int, int> ray::color(){
       std::tuple<double, double> angles = closest_body->getAngles(x,y,z);
       // if it's a star, return its color
       if (star* collideStar = dynamic_cast<star*>(closest_body)){
-        return collideStar->color(std::get<0>(angles), std::get<1>(angles));
+        return collideStar->color(std::get<0>(angles), std::get<1>(angles), I);
       }
       // if it's a planet, reflect and continue
       if (planet* collidePlanet = dynamic_cast<planet*>(closest_body)){
