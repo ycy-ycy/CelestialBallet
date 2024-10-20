@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ray tracing simulation of stars and planets">
+  <title>Ray Tracing Stars & Planets</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Ray Tracing Simulation</h1>
+    <p>Choose to add a planet or a star, and define its properties to simulate the interaction of celestial bodies.</p>
+  </header>
+
+  <section id="form">
+    <h2>Input Initial Values</h2>
+    <form id="inputForm" method="POST">
+      <div id="bodiesContainer">
+        <!-- Dynamic body form elements will be added here -->
+      </div>
+      <button type="button" id="addBodyBtn">Add Celestial Body</button><br><br>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="simulation">
+    <h2>Simulation Output</h2>
+    <canvas id="resultCanvas"></canvas>
+  </section>
+
+  <section id="simulation">
+    <!-- <canvas id="spaceCanvas"></canvas> -->
+    <video id="spaceVideo" width="100%" height="400px" loop autoplay muted>
+      <source src="static/videos/placeholder.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <div id="controls">
+      <h2>Interactive Controls</h2>
+      <button id="startSimBtn">Start Simulation</button>
+      <button id="pauseSimBtn">Pause Simulation</button>
+      <button id="resetSimBtn">Reset Simulation</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About the Project</h2>
+    <p>This project simulates the gravitational interactions between stars and planets, using ray tracing to capture the Doppler effect and the reflection of starlight on planetary surfaces. Dive into the details of how light and motion blend to shape our universe!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 RayTracingStars. All Rights Reserved.</p>
+  </footer>
+
+  <script src="/static/scripts.js"></script>
+</body>
+</html>
