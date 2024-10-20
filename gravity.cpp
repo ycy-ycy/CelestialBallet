@@ -15,7 +15,6 @@ std::function<std::vector<double>(std::vector<double>)> gravity(camera* cam, con
     result[5] = 0.0;
 
     // motion of celestial bodies
-    #pragma omp parallel for num_threads(8)
     for (int i = 0; i < bodies.size(); i++){
       result[6+6*i] = p[9+6*i];
       result[7+6*i] = p[10+6*i];
