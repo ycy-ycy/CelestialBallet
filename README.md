@@ -15,3 +15,5 @@
 
 - redstar.avi
 - twostar.avi
+- largeMassStars.avi
+- planet.avi

@@ -199,4 +199,5 @@ void planet::reflect(ray* photon, double theta, double phi){
   photon->vy = -2.0 * dot * delta.y + incident.y;
   photon->vz = -2.0 * dot * delta.z + incident.z;
   photon->I *= getReflection(theta, phi);
+  photon->x += photon->vx * r;
 }
