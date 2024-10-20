@@ -71,6 +71,7 @@ std::tuple<int, int, int> ray::color(){
       x += vx * x_p;
       y += vy * x_p;
       z += vz * x_p;
+      updateDistances();
       // anlges on the celestial body
       std::tuple<double, double> angles = closest_body->getAngles(x,y,z);
       // if it's a star, return its color
@@ -111,9 +112,9 @@ void ray::updateDistances(){
 }
 
 bool ray::move(){
-  x += vx * min_dist;
-  y += vy * min_dist;
-  z += vz * min_dist;
+  x += vx * 0.8*min_dist;
+  y += vy * 0.8*min_dist;
+  z += vz * 0.8*min_dist;
   double delta_x = closest_body->x - x;
   double delta_y = closest_body->y - y;
   double delta_z = closest_body->z - z;
