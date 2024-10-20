@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ray tracing simulation of stars and planets">
+  <title>Ray Tracing Stars & Planets</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Celestial Ballet</h1>
+    <p>Choose to add a planet or a star, and define its properties to simulate the interaction of celestial bodies.</p>
+  </header>
+
+  <section id="about">
+    <h2>About the Project</h2>
+    <p>This project explores the intricate dance between celestial bodies, simulating the gravitational interactions between stars and planets in a dynamic and visually compelling way. Using advanced ray tracing techniques, the simulation captures phenomena like the Doppler effect — illustrating how light shifts as objects move — and the reflection of starlight off planetary surfaces.</p>
+    <br>
+    <p>By combining accurate physics with real-time simulation, this project offers an interactive way to visualize how light and motion shape the universe. Users can define their own celestial bodies — stars and planets — and watch as the simulation brings their interactions to life. Whether you're interested in astronomy, physics, or the art of light itself, this project provides a fascinating glimpse into the mechanics of space.</p>
+    <br>
+    <p>This description focuses on the key aspects of your project, including the simulation of gravitational interactions and the visual appeal of ray tracing to capture realistic effects like the Doppler shift and starlight reflection.</p>
+  </section>
+  <section id="form">
+    <h2>Input Initial Values</h2>
+    <form id="inputForm" method="POST">
+      <div id="bodiesContainer">
+        <!-- Dynamic body form elements will be added here -->
+      </div>
+      <button type="button" id="addBodyBtn">Add Celestial Body</button><br><br>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="simulation">
+    <!-- <h2>Simulation Results</h2> -->
+    <canvas id="resultCanvas"></canvas>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 RayTracingStars. All Rights Reserved.</p>
+  </footer>
+
+  <script src="/static/scripts.js"></script>
+</body>
+</html>

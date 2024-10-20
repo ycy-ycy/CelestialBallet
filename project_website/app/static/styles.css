@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%; /* Ensure the body and html take the full viewport height */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure the footer is pushed to the bottom */
+}
+
+header {
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* Stack the elements vertically */
+  align-items: center;    /* Center the buttons horizontally */
+}
+
+form label {
+  color: #ffffff; /* Change this to your desired color */
+}
+
+#simulation {
+  margin: 30px auto;
+  position: relative;
+  max-width: 800px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#resultCanvas {
+  display: none; /* Hide the canvas initially */
+  background-color: #fff;
+  width: 100%;
+  height: 400px;
+}
+
+/* Uncomment and use if video is used instead of canvas */
+/* video {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  border: 2px solid #ffffff;
+} */
+
+#controls {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 1px;
+  border: none;
+  background: #0066cc;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #004d99;
+}
+
+#about {
+  padding: 30px;
+  color: white;
+}
+
+/* Footer stays at the bottom */
+footer {
+  padding: 15px;
+  background: rgba(26, 26, 26, 0.85); /* Slight transparency for better blending with the background */
+  color: #ccc;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
