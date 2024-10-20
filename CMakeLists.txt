@@ -16,6 +16,7 @@ set(SOURCES
     Vector3D.cpp
     ray.cpp
     bisection.cpp
+    moveit.cpp
 )
 
 add_executable(StellarBallet ${SOURCES})

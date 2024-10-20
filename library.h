@@ -182,4 +182,8 @@ void setBoundaries(double x, double y, double z);
 
 double bisection(std::function<double(double)> f, double x_min, double x_max, int n_max = 500, double tol = 1e-6);
 
+void rotateAll(const std::vector<celestialBody*> &bodies, double delta_t);
+
+void updateAll(camera* cam, const std::vector<celestialBody*> &bodies, double delta_t);
+
 #endif
